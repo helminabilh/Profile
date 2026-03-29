@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmi Nabil | Music Producer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:italic,wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-top: #000000;
+            --bg-bottom: #000000;
+            --text-color: #ffffff;
+            --accent: #888;
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --spotify-green: #1DB954;
+        }
+
+        [data-theme="light"] {
+            --bg-top: #ffffff;
+            --bg-bottom: #f5f5f5;
+            --text-color: #1a1a1a;
+        }
+
+        [data-theme="light"] .yt-description {
+            color: #1a1a1a;
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-bottom);
+            color: var(--text-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .bio-box p a {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: 0.3s;
+        }
+        .bio-box p a:hover {
+            opacity: 0.6;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 30px 5%;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-difference: difference;
+        }
+
+        .logo { font-weight: 600; letter-spacing: 4px; color: white; text-decoration: none; font-size: 14px; }
+
+        .mode-toggle {
+            cursor: pointer;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .mode-toggle:hover { background: white; color: black; }
+
+        .hero {
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), var(--bg-bottom)), 
+                        url('https://i.ibb.co.com/xZvJVG0/SAVE-20260328-152701-picsay.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .bio-box h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .bio-box p {
+            font-size: 1.1rem;
+            max-width: 480px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .artist-img {
+            width: 100%;
+            aspect-ratio: 5/5;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: grayscale(1);
+            transition: filter 1s ease;
+            border-radius: 2px;
+            animation: instagramSlide 12s infinite ease-in-out;
+        }
+        
+        .artist-img:hover { filter: grayscale(0); }
+
+        @keyframes instagramSlide {
+            0%, 30% { background-image: url('https://i.scdn.co/image/ab6761610000517485650ba7e080432414714b82'); }
+            33%, 63% { background-image: url('https://i.ibb.co.com/zTXtML16/Whats-App-Image-2026-03-29-at-03-19-07.jpg'); }
+            66%, 96% { background-image: url('https://i.ibb.co.com/zVVkFG7L/Whats-App-Image-2026-03-29-at-03-18-03.jpg'); }
+            100% { background-image: url('https://i.scdn.co/image/ab6761610000517485650ba7e080432414714b82'); }
+        }
+
+        .social-icons { display: flex; gap: 20px; font-size: 1.3rem; }
+        .social-icons a { color: var(--text-color); transition: 0.3s; opacity: 0.7; }
+        .social-icons a:hover { opacity: 1; transform: translateY(-3px); }
+
+        .media-section {
+            padding: 100px 8% 40px; 
+            position: relative;
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://img.youtube.com/vi/wDnA2pZyHbM/maxresdefault.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        [data-theme="light"] .media-section {
+            background-image: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(245,245,245,0.95)), url('https://img.youtube.com/vi/wDnA2pZyHbM/maxresdefault.jpg');
+        }
+
+        .container-small { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+
+        .spotify-box, .youtube-box {
+            margin-bottom: 30px; 
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            background: #111;
+        }
+
+        .yt-lite-btn {
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: white; 
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .yt-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 0px; 
+            text-align: left;
+        }
+
+        .offers {
+            padding: 60px 8% 100px; 
+            text-align: center;
+            background-color: var(--bg-bottom);
+        }
+
+        .section-label { 
+            font-size: 13px; 
+            letter-spacing: 3px; 
+            opacity: 0.6; 
+            margin-bottom: 40px; 
+            display: block; 
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .offer-card {
+            border: 1px solid rgba(128,128,128,0.3);
+            padding: 60px 40px;
+            transition: var(--transition);
+        }
+
+        .offer-card:hover {
+            background: var(--text-color);
+            color: var(--bg-top);
+        }
+
+        .offer-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; }
+
+        .wa-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 35px;
+            border: 1px solid currentColor;
+            text-decoration: none;
+            color: inherit;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .x-card-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .x-card {
+            background: #15181c;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+            text-decoration: none;
+            color: white !important;
+            transition: 0.3s;
+        }
+        .x-card:hover { border-color: #1d9bf0; }
+
+        /* Style Statistik Spotify */
+        .spotify-stats {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -2px;
+            display: block;
+            line-height: 1;
+        }
+        .stat-label {
+            display: block;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin: 10px 0 15px;
+        }
+        .stat-info {
+            font-size: 14px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+        .spotify-brand {
+            color: var(--spotify-green);
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .spotify-brand:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        footer { padding: 60px; text-align: center; font-size: 10px; letter-spacing: 3px; opacity: 0.4; }
+
+        @media (max-width: 968px) {
+            nav { grid-template-columns: 1fr 1fr; }
+            .logo { display: none; }
+            .hero { height: auto; padding: 120px 8% 60px; }
+            .hero-content { display: flex; flex-direction: column-reverse; gap: 40px; }
+            .bio-box h1 { text-align: center; }
+            .bio-box p { margin: 0 auto 35px; text-align: center; }
+            .social-icons { justify-content: center; }
+            .artist-img { display: block; width: 250px; margin: 0 auto; } 
+            .offer-grid { grid-template-columns: 1fr; }
+            .yt-description { text-align: center; }
+            .section-label { font-size: 11px; letter-spacing: 2px; margin-bottom: 30px; }
+            .offers { padding-top: 40px; }
+            .stat-number { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <nav>
+        <a href="#" class="logo">HELMI NABIL RECORDS</a>
+        <button class="mode-toggle" onclick="toggleTheme()">Light Mode</button>
+        <div style="text-align: right; font-size: 10px; letter-spacing: 2px; color: white;">EST. 2026</div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content reveal">
+            <div class="bio-box">
+                <h1>Helmi Nabil</h1>
+                <p>Helmi Nabil adalah musisi, penulis lagu, produser, dan drummer asal Cilacap, Jawa Tengah. Pada pertengahan 2024, ia merilis enam single perdana yang diciptakan khusus untuk member JKT48 (Oshi). Selain aktif di dunia pop/idol, ia juga memiliki rekam jejak di skena metal sebagai bagian dari band Grindcore atau Hardcore, <a href="https://open.spotify.com/track/1HixkFg5506atsgCWlh2Bc?si=bf247891b4b4454b" target="_blank">Mental Disability</a> dan <a href="https://www.instagram.com/dvrkside_ina/" target="_blank">Darkside</a>. </p>
+                
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/helminabil_"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://x.com/stranger6001"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.tiktok.com/@helminabil_"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.youtube.com/@helminabil"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://discord.gg/jp9s8XtD"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://open.spotify.com/artist/54SzCD3K2bVeK3cYx4MI9N"><i class="fa-brands fa-spotify"></i></a>
+                    <a href="https://music.apple.com/id/artist/helmi-nabil/1758281339"><i class="fa-brands fa-apple"></i></a>
+                </div>
+            </div>
+            <div class="artist-img"></div>
+        </div>
+    </section>
+
+    <section class="media-section">
+        <div class="container-small">
+            <span class="section-label">PROJECT LAGU YANG SUDAH DIGARAP AKHIR-AKHIR INI.</span>
+            
+            <div class="spotify-box reveal">
+                <iframe style="border-radius:0px" src="https://open.spotify.com/embed/playlist/6O75A4mnh8Sz2WAwVtXPGj?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <div class="youtube-box reveal">
+                <a href="https://www.youtube.com/watch?v=wDnA2pZyHbM" target="_blank" style="text-decoration: none; position: relative; display: block;">
+                    <img src="https://img.youtube.com/vi/wDnA2pZyHbM/maxresdefault.jpg" alt="Helmi Nabil Video" style="width: 100%; display: block; filter: brightness(0.6);">
+                    <div class="yt-lite-btn">
+                        <i class="fa-brands fa-youtube" style="font-size: 70px; margin-bottom: 10px; opacity: 0.9;"></i>
+                        <p style="font-weight: 600; letter-spacing: 3px; text-transform: uppercase; font-size: 10px; color: white;">Klik Untuk Memutar</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="yt-description reveal">
+                <p>Video YouTube di atas merupakan project dari komunitas JKT48 Fans Cilacap yang bertajuk "Kowe Teka Gawe Bungah". Proyect ini diselenggarakan untuk menyambut kedatangan JKT48 di Kota Cilacap pada 9 Mei 2024. Seluruh anggota komunitas sangat antusias karena momen ini merupakan penantian selama 12 tahun sejak JKT48 pertama kali terbentuk. Nama project ini diambil dari bahasa Ngapak Cilacap yang berarti "Kalian Datang Membawa Kebahagiaan".</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="offers">
+        <div class="reveal">
+            <span class="section-label">MAU BIKIN LAGU? ATAU SUDAH PUNYA LAGU TAPI MENTAH? BISA CEK DIBAWAH INI</span>
+            <div class="offer-grid">
+                <div class="offer-card">
+                    <h3>Arrangement</h3>
+                    <p>Produksi musik dari ide awal hingga menjadi sebuah lagu.</p>
+                    <a href="https://wa.me/6281325578375" class="wa-btn">Tanya via WhatsApp</a>
+                </div>
+                <div class="offer-card">
+                    <h3>Mixing & Mastering</h3>
+                    <p>Kualitas audio standar industri untuk semua platform streaming.</p>
+                    <a href="https://wa.me/6281325578375" class="wa-btn">Tanya via WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="x-card-container reveal">
+                <a href="https://x.com/stranger6001" target="_blank" class="x-card">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <img src="https://i.scdn.co/image/ab6761610000517485650ba7e080432414714b82" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover;">
+                        <div>
+                            <div style="font-weight: bold; font-size: 15px;">Helmi Nabil <i class="fas fa-check-circle" style="color: #1d9bf0; font-size: 12px;"></i></div>
+                            <div style="opacity: 0.5; font-size: 13px;">@stranger6001</div>
+                        </div>
+                        <i class="fab fa-x-twitter" style="margin-left: auto; font-size: 20px;"></i>
+                    </div>
+                    <p style="font-size: 14px; line-height: 1.5; margin-bottom: 15px;">Ikuti perkembangan project lagu terbaru dan update produksi musik saya langsung di X.</p>
+                    <div style="color: #1d9bf0; font-size: 13px; font-weight: 600;">Lihat Postingan Terbaru di X →</div>
+                </a>
+
+                <div class="spotify-stats reveal" id="spotifyStatBox">
+                    <span class="stat-number" data-target="500 lebih">0</span>
+                    <span class="stat-label">Lebih Pendengar</span>
+                    <div class="stat-info">
+                        Helmi Nabil di <a href="https://open.spotify.com/artist/54SzCD3K2bVeK3cYx4MI9N?si=rlU6jxBJQ5-Y6MNJfa3Phw" target="_blank" class="spotify-brand">Spotify</a> <i class="fa-brands fa-spotify" style="color: #1DB954; font-size: 18px;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © Helmi Nabil Records \ Terima Kasih :)
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.querySelector('.mode-toggle');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                btn.innerText = 'Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.innerText = 'Light Mode';
+            }
+        }
+
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if(entry.target.id === 'spotifyStatBox') {
+                        startSpotifyCounter();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function startSpotifyCounter() {
+            const counter = document.querySelector('.stat-number');
+            const target = parseInt(counter.getAttribute('data-target'));
+            let count = 0;
+            const speed = 2000;
+            const increment = target / (speed / 16);
+
+            const updateCount = () => {
+                if (count < target) {
+                    count += increment;
+                    counter.innerText = Math.floor(count);
+                    requestAnimationFrame(updateCount);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        }
+    </script>
+</body>
+</html>
